@@ -1,0 +1,33 @@
+# Primeira etapa: Construção do projeto Java com Maven
+FROM maven:3.8.3-openjdk-11 AS builder
+
+WORKDIR /app
+
+# Copia o arquivo pom.xml para o diretório de trabalho
+COPY pom.xml .
+
+# Faz o download das dependências do Maven
+RUN mvn dependency:go-offline
+
+# Copia o restante do código-fonte
+COPY . .
+
+# Define a variável de ambiente para o nome do arquivo JAR
+ARG JAR_FILE=target/seu-arquivo.jar
+
+# Faz o build do projeto com o Maven
+RUN mvn package -DskipTests
+
+# Segunda etapa: Execução do projeto Java com a imagem do JRE
+FROM openjdk:11-jre-slim
+
+WORKDIR /app
+
+# Copia o arquivo JAR gerado na etapa anterior para o contêiner
+COPY --from=builder /app/${JAR_FILE} /app/app.jar
+
+# Porta que a aplicação expõe
+EXPOSE 8080
+
+# Comando para iniciar a aplicação quando o contêiner for executado
+CMD ["java", "-jar", "app.jar"]
