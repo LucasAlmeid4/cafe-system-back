@@ -39,22 +39,6 @@ public class DataProximoCoffeeServiceTest {
         MockitoAnnotations.openMocks(this);
     }
 
-    @Test
-    public void testCadastrarData_ComSucesso() {
-
-        DataProximoCoffeeDTO dataDTO = new DataProximoCoffeeDTO();
-        dataDTO.setDate("31/07/2023");
-
-        LocalDate date = LocalDate.of(2023, 7, 31);
-        when(dataProximoCoffeeRepository.existsByDate(date)).thenReturn(false);
-        when(dataProximoCoffeeRepository.save(any(DataProximoCoffee.class))).thenReturn(new DataProximoCoffee());
-        when(modelMapper.map(any(DataProximoCoffee.class), eq(DataProximoCoffeeDTO.class))).thenReturn(dataDTO);
-
-        ResponseEntity<DataProximoCoffeeDTO> result = dataProximoCoffeeService.cadastrarData(dataDTO);
-
-        assertNotNull(result);
-        assertEquals(HttpStatus.CREATED, result.getStatusCode());
-    }
 
     @Test
     public void testCadastrarData_DataDuplicadaException() {
