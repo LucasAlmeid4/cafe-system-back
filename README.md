@@ -40,6 +40,3 @@ Antes de iniciar a execução do Café Connection, verifique se você possui os 
 ### Documentação da API
 A documentação da API está disponível em: http://localhost:8080/swagger-ui.html
 
-Testes
-Para executar os testes do backend, você pode utilizar sua IDE ou executar o seguinte comando na raiz do projeto:
-
