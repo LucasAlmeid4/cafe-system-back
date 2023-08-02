@@ -13,7 +13,7 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3001");
+        config.addAllowedOrigin("https://cafe-management-system-front-olqp-dp3p5dsjx-lucasalmeid4.vercel.app");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
