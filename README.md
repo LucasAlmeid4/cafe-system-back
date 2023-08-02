@@ -38,5 +38,4 @@ Antes de iniciar a execução do Café Connection, verifique se você possui os 
 6. Inicie a aplicação Spring Boot.
 
 ### Documentação da API
-A documentação da API está disponível em: http://localhost:8080/swagger-ui.html
-
+A documentação da API está disponível em: https://cafe-system-back-production.up.railway.app/swagger-ui/index.html#/
