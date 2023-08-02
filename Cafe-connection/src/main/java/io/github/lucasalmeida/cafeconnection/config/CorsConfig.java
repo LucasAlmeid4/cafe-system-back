@@ -1,26 +1,23 @@
 package io.github.lucasalmeida.cafeconnection.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.stereotype.Component;
+import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
-@Configuration
-public class CorsConfig {
+@Component
+public class CorsConfig implements Filter {
 
-    @Bean
-    public CorsFilter corsFilter() {
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("https://cafe-management-system-front-olqp-dp3p5dsjx-lucasalmeid4.vercel.app");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
+        HttpServletResponse httpResponse = (HttpServletResponse) response;
+        httpResponse.setHeader("Access-Control-Allow-Origin", "https://cafe-management-system-front-olqp-git-main-lucasalmeid4.vercel.app");
+        httpResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        httpResponse.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+        httpResponse.setHeader("Access-Control-Max-Age", "3600");
 
-        return new CorsFilter(source);
+        chain.doFilter(request, response);
     }
 }
-
