@@ -5,10 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -20,7 +17,8 @@ public class DataProximoCoffee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @Column(columnDefinition = "DATE") // Especifica o tipo de dado como DATE
+    @DateTimeFormat(pattern = "dd/MM/yyyy") // Formato da data no banco de dados
     private LocalDate date;
 
 }
